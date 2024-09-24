@@ -1,4 +1,4 @@
-# nosql_template
+# cityWallsLeti
 
 ## [Ссылка на видео](https://drive.google.com/file/d/1qwmrUHjwjZIEZzwVEfMBjpvcHjYU1SnB/view?usp=sharing)
 
