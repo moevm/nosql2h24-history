@@ -1,5 +1,6 @@
 # nosql_template
 
+###[Ссылка на видео](https://drive.google.com/file/d/1qwmrUHjwjZIEZzwVEfMBjpvcHjYU1SnB/view?usp=sharing)
 
 ## Предварительная проверка заданий
 
