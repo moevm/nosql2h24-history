@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 const db = new Database({
-  url: 'http://arango:8529', // то имя сервиса в docker-compose
+  url: 'http://arango:8529', // имя сервиса в docker-compose
   auth: { username: 'root', password: 'password' }
 });
 
