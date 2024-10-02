@@ -1,0 +1,9 @@
+[
+  { "_from": "houses/avangardnaya_2a", "_to": "streets/avangardnaya" },
+  { "_from": "houses/avangardnaya_2k2a", "_to": "streets/avangardnaya" },
+  { "_from": "houses/avangardnaya_3a", "_to": "streets/avangardnaya" },
+  { "_from": "houses/aviakonstruktorov_1a", "_to": "streets/aviakonstruktorov" },
+  { "_from": "houses/aviakonstruktorov_2a", "_to": "streets/aviakonstruktorov" },
+  { "_from": "houses/babushkina_7a", "_to": "streets/babushkina" },
+  { "_from": "houses/babushkina_8a", "_to": "streets/babushkina" }
+]

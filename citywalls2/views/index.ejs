@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Главная страница</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Данные о городских улицах и домах</h1>
+    <nav>
+      <a href="/streets">Список улиц</a>
+    </nav>
+  </header>
+  <main>
+    <button id="importButton">Импортировать данные</button>
+  </main>
+  <footer>
+    <p>&copy; 2023 City Data App</p>
+  </footer>
+  <script>
+    document.getElementById('importButton').addEventListener('click', function() {
+      fetch('/import', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert(data);
+      })
+      .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Ошибка при импорте данных.');
+      });
+    });
+  </script>
+</body>
+</html>
