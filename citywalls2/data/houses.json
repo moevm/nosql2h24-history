@@ -1,0 +1,73 @@
+[
+    {
+      "_key": "avangardnaya_2a",
+      "address": "ул. Авангардная, 2 Литер А",
+      "year": 1961,
+      "floors": 5,
+      "apartments": 78,
+      "condition": "Исправный",
+      "management_company": "УК «Жилищник»",
+      "series_type": "ЛГ-528"
+    },
+    {
+      "_key": "avangardnaya_2k2a",
+      "address": "ул. Авангардная, 2 корпус 2 Литер А",
+      "year": 1993,
+      "floors": 10,
+      "apartments": 80,
+      "condition": "Исправный",
+      "management_company": "УК «Жилищник»",
+      "series_type": "Индивидуальный"
+    },
+    {
+      "_key": "avangardnaya_3a",
+      "address": "ул. Авангардная, 3 Литер А",
+      "year": 1969,
+      "floors": 9,
+      "apartments": 231,
+      "condition": "Исправный",
+      "management_company": "УК «Жилищник»",
+      "series_type": "ЛГ-528"
+    },
+    {
+      "_key": "aviakonstruktorov_1a",
+      "address": "пр-кт Авиаконструкторов, 1 Литер А",
+      "year": 1988,
+      "floors": 16,
+      "apartments": 463,
+      "condition": "Исправный",
+      "management_company": "УК «ЖКС №4 приморского района»",
+      "series_type": "137"
+    },
+    {
+      "_key": "aviakonstruktorov_2a",
+      "address": "пр-кт Авиаконструкторов, 2 Литер А",
+      "year": 2008,
+      "floors": 25,
+      "apartments": 493,
+      "condition": "Исправный",
+      "management_company": "ТСЖ «Авиатор-2»",
+      "series_type": "Индивидуальный"
+    },
+    {
+      "_key": "babushkina_7a",
+      "address": "ул. Бабушкина, 7 Литер А",
+      "year": 1959,
+      "floors": 5,
+      "apartments": 54,
+      "condition": "Исправный",
+      "management_company": "УК «ЖКС №2 невского района»",
+      "series_type": "1-507"
+    },
+    {
+      "_key": "babushkina_8a",
+      "address": "ул. Бабушкина, 8 Литер А",
+      "year": 1959,
+      "floors": 5,
+      "apartments": 38,
+      "condition": "Исправный",
+      "management_company": "УК «ЖКС №2 невского района»",
+      "series_type": "Индивидуальный"
+    }
+  ]
+  
