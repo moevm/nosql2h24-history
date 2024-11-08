@@ -1,15 +1,16 @@
 const asyncHandler = require("express-async-handler");
 const {importData} = require("../import");
+const db = require("../db");
 
 
 // Обработчики написаны с использованием express-async-handler, что позволяет управлять асинхронными операциями
 // в функциях-обработчиках без явного использования блоков try/catch или обработки ошибок с помощью catch().
 // Это упрощает обработку ошибок в асинхронных операциях.
-
-const {
-    // countAndListGenres,
-    // getBooksByGenre,
-} = require("./functions");
+//
+// const {
+//     // countAndListGenres,
+//     // getBooksByGenre,
+// } = require("./functions");
 
 exports.index = asyncHandler(async (req, res) => {
     res.render('index');
@@ -21,9 +22,10 @@ exports.import = asyncHandler(async (req, res) => {
 });
 
 exports.streets = asyncHandler(async (req, res) => {
-    // Используем AQL-запрос для получения всех улиц
+    console.log("Запрос на получение списка улиц...");
     const cursor = await db.query('FOR street IN streets RETURN street');
     const streets = await cursor.all();
+    console.log("Улицы:", streets);
     res.render('streets', { streets });
 });
 

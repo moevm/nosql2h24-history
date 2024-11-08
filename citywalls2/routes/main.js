@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const map_controller = require("../controllers/mapController");
 const street_controller = require("../controllers/streetController");
 
 // Главная страница
