@@ -1,6 +1,50 @@
 [
-    { "_key": "avangardnaya", "name": "Авангардная" },
-    { "_key": "aviakonstruktorov", "name": "Авиаконструкторов проспект" },
-    { "_key": "babushkina", "name": "Бабушкина" }
-  ]
-  
+  {
+    "_key": "10krasnoarmeiskaya",
+    "name": "10-я Красноармейская",
+    "type": "улица",
+    "district": "Адмиралтейский"
+  },
+  {
+    "_key": "gromova",
+    "name": "Громова",
+    "type": "улица",
+    "district": "Красногвардейский"
+  },
+  {
+    "_key": "desantnikov",
+    "name": "Десантников",
+    "type": "улица",
+    "district": "Красносельский"
+  },
+  {
+    "_key": "sikeirosa",
+    "name": "Сикейроса",
+    "type": "улица",
+    "district": "Выборгский"
+  },
+  {
+    "_key": "komendatskii",
+    "name": "Комендантский",
+    "type": "проспект",
+    "district": "Приморский"
+  },
+  {
+    "_key": "vitebskii",
+    "name": "Витебский",
+    "type": "проспект",
+    "district": "Московский"
+  },
+  {
+    "_key": "piskarevskii",
+    "name": "Пискарёвский",
+    "type": "бульвар",
+    "district": "Красногвардейский"
+  },
+  {
+    "_key": "sirenevii",
+    "name": "Сиреневый",
+    "type": "бульвар",
+    "district": "Выборгский"
+  }
+]

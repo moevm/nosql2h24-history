@@ -1,9 +1,50 @@
 [
-  { "_from": "houses/avangardnaya_2a", "_to": "streets/avangardnaya" },
-  { "_from": "houses/avangardnaya_2k2a", "_to": "streets/avangardnaya" },
-  { "_from": "houses/avangardnaya_3a", "_to": "streets/avangardnaya" },
-  { "_from": "houses/aviakonstruktorov_1a", "_to": "streets/aviakonstruktorov" },
-  { "_from": "houses/aviakonstruktorov_2a", "_to": "streets/aviakonstruktorov" },
-  { "_from": "houses/babushkina_7a", "_to": "streets/babushkina" },
-  { "_from": "houses/babushkina_8a", "_to": "streets/babushkina" }
+  {
+    "_from": "houses/10krasnoarmeiskaya3_a",
+    "_to": "streets/10krasnoarmeiskaya"
+  },
+  {
+    "_from": "houses/10krasnoarmeiskaya9_a",
+    "_to": "streets/10krasnoarmeiskaya"
+  },
+  {
+    "_from": "houses/10krasnoarmeiskaya9_b",
+    "_to": "streets/10krasnoarmeiskaya"
+  },
+  {
+    "_from": "houses/gromova8_a",
+    "_to": "streets/gromova"
+  },
+  {
+    "_from": "houses/desantnikov32_2b",
+    "_to": "streets/desantnikov"
+  },
+  {
+    "_from": "houses/sikeirosa11_1a",
+    "_to": "streets/sikeirosa"
+  },
+  {
+    "_from": "houses/sikeirosa11_2a",
+    "_to": "streets/sikeirosa"
+  },
+  {
+    "_from": "houses/komendatskii13_1a",
+    "_to": "streets/komendatskii"
+  },
+  {
+    "_from": "houses/vitebskii73_3a",
+    "_to": "streets/vitebskii"
+  },
+  {
+    "_from": "houses/piskarevskii9_1a",
+    "_to": "streets/piskarevskii"
+  },
+  {
+    "_from": "houses/sirenevii7_1a",
+    "_to": "streets/sirenevii"
+  },
+  {
+    "_from": "houses/sirenevii8_1a",
+    "_to": "streets/sirenevii"
+  }
 ]
