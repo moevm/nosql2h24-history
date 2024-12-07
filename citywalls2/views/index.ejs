@@ -1,40 +1,72 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Главная страница</title>
-  <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервис истории домов Санкт-Петербурга</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
 </head>
 <body>
-  <header>
-    <h1>Данные о городских улицах и домах</h1>
-    <nav>
-      <a href="/streets">Список улиц</a>
-    </nav>
-  </header>
-  <main>
-    <button id="importButton">Импортировать данные</button>
-  </main>
-  <footer>
-    <p>&copy; 2023 City Data App</p>
-  </footer>
-  <script>
-    document.getElementById('importButton').addEventListener('click', function() {
-      fetch('/import', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert(data);
-      })
-      .catch(error => {
-        console.error('Ошибка:', error);
-        alert('Ошибка при импорте данных.');
-      });
-    });
-  </script>
+    <h1>Сервис истории домов Санкт-Петербурга</h1>
+
+    <form action="/import" method="POST" style="margin-bottom: 20px;">
+        <button id="importButton" type="submit" class="button">Импорт данных</button>
+    </form>
+
+    <form action="/export" method="GET" style="margin-bottom: 20px;">
+        <button type="submit" class="button">Экспорт данных</button>
+    </form>
+
+    <a href="/main" class="link">На главную</a>
+
+    <script>
+        document.getElementById('importButton').addEventListener('click', function() {
+            event.preventDefault();
+
+            fetch('/import', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // данные в запросе будут в формате JSON
+                }
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    alert('Ошибка при импорте данных.');
+                });
+        });
+
+        document.getElementById('exportButton').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            fetch('/export', {
+                method: 'GET',
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка HTTP: ${response.status}`);
+                    }
+                    return response.blob(); // Получаем данные как файл
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'exported_data.json'; // Указываем имя файла
+                    document.body.appendChild(a);
+                    a.click(); // Автоматически кликаем по ссылке
+                    window.URL.revokeObjectURL(url); // Освобождаем память
+                    alert('Экспорт данных завершён!');
+                })
+                .catch(error => {
+                    console.error('Ошибка при экспорте данных:', error);
+                    alert('Ошибка при экспорте данных.');
+                });
+        });
+    </script>
 </body>
 </html>

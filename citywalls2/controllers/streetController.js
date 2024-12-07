@@ -51,6 +51,35 @@ exports.houses = asyncHandler(async (req, res) => {
     res.render('houses', { houses, streetKey });
 });
 
+// Маршрут для экспорта данных
+exports.export = asyncHandler(async (req, res) => {
+    // Получаем данные из коллекций
+    const streetsCursor = await db.collection('streets').all();
+    const housesCursor = await db.collection('houses').all();
+    const locatedAtCursor = await db.collection('located_at').all();
+
+    const streets = await streetsCursor.all();
+    const houses = await housesCursor.all();
+    const locatedAt = await locatedAtCursor.all();
+
+    // Формируем объект для экспорта
+    const exportData = {
+        streets,
+        houses,
+        located_at: locatedAt,
+    };
+
+    // Указываем заголовки для скачивания файла
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Disposition', 'attachment; filename="exported_data.json"');
+
+    // Отправляем данные клиенту
+    res.json(exportData);
+});
+
+
+
+
 // // Отображает страницу с подробной информацией о конкретном жанре на основе его идентификатора
 // exports.genre_detail = asyncHandler(async (req, res, next) => {
 //     // Get details of genre and all associated books (in parallel)
