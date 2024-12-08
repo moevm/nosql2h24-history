@@ -31,7 +31,11 @@
         <% houses.forEach(function(house) { %>
             <tr>
                 <td><img src="<%= house.photo %>" alt="Фото дома"></td>
-                <td><%= house.street %>, <%= house.house_number %></td>
+                <td>
+                    <a href="/main/streets/<%= encodeURIComponent(house.street) %>/houses/<%= house._key %>">
+                        <%= house.street %>, <%= house.house_number %>
+                    </a>
+                </td>
                 <td><%= house.construction_year %></td>
                 <td><%= house.floors %></td>
                 <td><%= house.apartments %></td>
