@@ -97,7 +97,7 @@ exports.streets = asyncHandler( async (req, res) => {
 
 exports.housesByStreet = asyncHandler(async (req, res) => {
     const streetName = req.params.streetName; // Получаем имя улицы из URL
- 
+
     // Запрашиваем данные улицы, чтобы получить её тип
     const streetQuery = `
             FOR street IN streets
@@ -106,11 +106,11 @@ exports.housesByStreet = asyncHandler(async (req, res) => {
         `;
     const streetCursor = await db.query(streetQuery, { streetName });
     const streetData = await streetCursor.next();
- 
+
     if (!streetData) {
         return res.status(404).send('Улица не найдена.');
     }
- 
+
     // Запрашиваем дома, относящиеся к указанной улице
     const housesQuery = `
             FOR house IN houses
@@ -120,31 +120,33 @@ exports.housesByStreet = asyncHandler(async (req, res) => {
         `;
     const housesCursor = await db.query(housesQuery, { streetName });
     const houses = await housesCursor.all();
- 
+
     res.render('houses', {
         title: `${streetData.name} (${streetData.type}). Количество найденных домов: ${houses.length}`,
         houses,
     });
- 
+
 });
 
 exports.houseDetails = asyncHandler(async (req, res) => {
-    const houseId = req.params.houseId; // ID $.,  (' URL
- 
-    // uery = `
+    const houseId = req.params.houseId; // ID дома из URL
+
+    // Запрашиваем данные дома по его ID
+    const query = `
         FOR house IN houses
             FILTER house._key == @houseId
             RETURN house
     `;
     const houseCursor = await db.query(query, { houseId });
     const house = await houseCursor.next();
- 
+
     if (!house) {
-        return res.status(404).send('., -% - )$%-.');
+        return res.status(404).send('Дом не найден.');
     }
- 
+
     res.render('house', {
-        title: `        house,
+        title: `Страница дома: ${house.street}, ${house.house_number}`,
+        house,
     });
- 
+
 });

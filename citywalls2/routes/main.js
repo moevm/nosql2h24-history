@@ -21,11 +21,7 @@ router.get('/main/streets/filter', street_controller.streets)
 // Маршрут для отображения домов конкретной улицы
 router.get('/main/streets/:streetName/houses', street_controller.housesByStreet);
 
-
-// router.get('/streets/:key/houses', street_controller.houses)
-
-
-//  `h`cb $+o ab` -(fk $., 
+// Маршрут для страницы дома
 router.get('/main/streets/:streetName/houses/:houseId', street_controller.houseDetails);
 
 module.exports = router;
