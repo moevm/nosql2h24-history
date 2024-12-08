@@ -6,6 +6,8 @@ const street_controller = require("../controllers/streetController");
 // Главная страница
 router.get('/', street_controller.index)
 
+router.get('/main', street_controller.main)
+
 router.post('/import',  street_controller.import)
 
 // Маршрут для экспорта данных
