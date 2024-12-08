@@ -127,35 +127,3 @@ exports.housesByStreet = asyncHandler(async (req, res) => {
     });
  
 });
-
-
-
-// exports.streets = asyncHandler(async (req, res) => {
-//     console.log("Запрос на получение списка улиц...");
-//     const cursor = await db.query('FOR street IN streets RETURN street');
-//     const streets = await cursor.all();
-//     console.log("Улицы:", streets);
-//     res.render('streets', { streets });
-// });
-//
-// exports.houses = asyncHandler(async (req, res) => {
-//     const streetKey = req.params.key;
-//     const streetId = `streets/${streetKey}`;
-//     console.log(`Запрос на получение домов для streetId: ${streetId}`);
-//
-//     const query = `
-//       FOR house IN houses
-//         FILTER house._id IN (
-//           FOR edge IN located_at
-//             FILTER edge._to == @streetId
-//             RETURN edge._from
-//         )
-//       RETURN house
-//     `;
-//     const bindVars = { streetId };
-//     const cursor = await db.query(query, bindVars);
-//     const houses = await cursor.all();
-//     console.log(`Найдено домов: ${houses.length}`);
-//     console.log('Дома:', houses);
-//     res.render('houses', { houses, streetKey });
-// });
