@@ -16,13 +16,9 @@ router.post('/import',  street_controller.import)
 // Маршрут для экспорта данных
 router.get('/export', street_controller.export)
 
-
-
-
-
-router.get('/streets',  street_controller.streets)
-
-router.get('/streets/:key/houses', street_controller.houses)
+// router.get('/streets',  street_controller.streets)
+//
+// router.get('/streets/:key/houses', street_controller.houses)
 
 
 module.exports = router;
