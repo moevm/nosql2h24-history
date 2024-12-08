@@ -95,6 +95,38 @@ exports.streets = asyncHandler( async (req, res) => {
     res.render('streets', { title: 'Улицы Санкт-Петербурга (результат фильтрации)', streets });
 });
 
+exports.housesByStreet = asyncHandler(async (req, res) => {
+    const streetName = req.params.streetName; // Получаем имя улицы из URL
+ 
+    // Запрашиваем данные улицы, чтобы получить её тип
+    const streetQuery = `
+            FOR street IN streets
+                FILTER street.name == @streetName
+                RETURN street
+        `;
+    const streetCursor = await db.query(streetQuery, { streetName });
+    const streetData = await streetCursor.next();
+ 
+    if (!streetData) {
+        return res.status(404).send('Улица не найдена.');
+    }
+ 
+    // Запрашиваем дома, относящиеся к указанной улице
+    const housesQuery = `
+            FOR house IN houses
+                FILTER house.street == @streetName
+                SORT house.house_number ASC
+                RETURN house
+        `;
+    const housesCursor = await db.query(housesQuery, { streetName });
+    const houses = await housesCursor.all();
+ 
+    res.render('houses', {
+        title: `${streetData.name} (${streetData.type}). Количество найденных домов: ${houses.length}`,
+        houses,
+    });
+ 
+});
 
 
 

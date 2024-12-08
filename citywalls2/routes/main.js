@@ -16,7 +16,11 @@ router.get('/export', street_controller.export)
 // Маршрут для страницы фильтрации улиц
 router.get('/main/streets', street_controller.streets_filter)
 
+// Маршрут для отображения домов конкретной улицы
+router.get('/main/streets/:streetName/houses', street_controller.housesByStreet);
+
 router.get('/main/streets/filter', street_controller.streets)
+
 
 // router.get('/streets/:key/houses', street_controller.houses)
 
