@@ -1,59 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Дома на улице <%= streetKey %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>Дома на улице <%= streetKey %></h1>
-    <nav>
-        <a href="/">Главная</a> |
-        <a href="/streets">Список улиц</a>
-    </nav>
-</header>
-<main>
-    <p>Найдено домов: <%= houses.length %></p>
+<h1><%= title %></h1>
+
+<% if (!houses || houses.length === 0) { %>
+    <p>На этой улице нет домов.</p>
+<% } else { %>
     <table>
         <thead>
         <tr>
             <th>Фото</th>
             <th>Адрес</th>
-            <th>Год постройки</th>
-            <th>Этажей</th>
-            <th>Квартиры</th>
+            <th>Год</th>
+            <th>Количество этажей</th>
+            <th>Количество квартир</th>
             <th>Состояние</th>
             <th>УК</th>
-            <th>Серия</th>
+            <th>Серия, тип</th>
             <th>Район</th>
         </tr>
         </thead>
         <tbody>
-        <% if (houses.length > 0) { %>
-            <% houses.forEach(function(house) { %>
-                <tr>
-                    <td><img src="<%= house.photo %>" alt="Фото дома" width="100"></td>
-                    <td><%= house.street %>, <%= house.house_number %></td>
-                    <td><%= house.construction_year %></td>
-                    <td><%= house.floors %></td>
-                    <td><%= house.apartments %></td>
-                    <td><%= house.condition %></td>
-                    <td><%= house.management_company %></td>
-                    <td><%= house.series %></td>
-                    <td><%= house.district %></td>
-                </tr>
-            <% }); %>
-        <% } else { %>
+        <% houses.forEach(function(house) { %>
             <tr>
-                <td colspan="9">Дома не найдены.</td>
+                <td><img src="<%= house.photo %>" alt="Фото дома"></td>
+                <td><%= house.street %>, <%= house.house_number %></td>
+                <td><%= house.construction_year %></td>
+                <td><%= house.floors %></td>
+                <td><%= house.apartments %></td>
+                <td><%= house.condition %></td>
+                <td><%= house.management_company %></td>
+                <td><%= house.series %></td>
+                <td><%= house.district %></td>
             </tr>
-        <% } %>
+        <% }); %>
         </tbody>
     </table>
-</main>
-<footer>
-    <p>&copy; 2023 City Data App</p>
-</footer>
+<% } %>
+
+<a href="/main/streets">К списку улиц</a>
 </body>
 </html>

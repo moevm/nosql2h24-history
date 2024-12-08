@@ -9,12 +9,16 @@
 <body>
 <h1><%= title %></h1>
 
-<% if (streets.length === 0) { %>
-    <p>Ничего не найдено по заданным критериям.</p>
+<% if (!streets || streets.length === 0) { %>
+    <p>Нет улиц подходящих под ваш фильтр.</p>
 <% } else { %>
     <ul>
         <% streets.forEach(function(street) { %>
-            <li><%= street.name %> (<%= street.type %>, <%= street.district %>)</li>
+            <li>
+                <a href="/main/streets/<%= encodeURIComponent(street.name) %>/houses">
+                    <%= street.name %> (<%= street.type %>, <%= street.district %>)
+                </a>
+            </li>
         <% }); %>
     </ul>
 <% } %>
