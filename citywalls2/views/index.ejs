@@ -14,13 +14,13 @@
     </form>
 
     <form action="/export" method="GET" style="margin-bottom: 20px;">
-        <button type="submit" class="button">Экспорт данных</button>
+        <button id="exportButton" type="submit" class="button" disabled>Экспорт данных</button>
     </form>
 
-    <a href="/main" class="link">На главную</a>
+    <a id="mainLink" href="/main" class="link" style="pointer-events: none; color: grey;">На главную</a>
 
     <script>
-        document.getElementById('importButton').addEventListener('click', function() {
+        document.getElementById('importButton').addEventListener('click', function(event) {
             event.preventDefault();
 
             fetch('/import', {
@@ -32,6 +32,10 @@
                 .then(response => response.text())
                 .then(data => {
                     alert(data);
+                    document.getElementById('exportButton').disabled = false;
+                    const mainLink = document.getElementById('mainLink');
+                    mainLink.style.pointerEvents = 'auto';
+                    mainLink.style.color = ''; // Убираем серый цвет
                 })
                 .catch(error => {
                     console.error('Ошибка:', error);
