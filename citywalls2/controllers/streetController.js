@@ -127,3 +127,24 @@ exports.housesByStreet = asyncHandler(async (req, res) => {
     });
  
 });
+
+exports.houseDetails = asyncHandler(async (req, res) => {
+    const houseId = req.params.houseId; // ID $.,  (' URL
+ 
+    // uery = `
+        FOR house IN houses
+            FILTER house._key == @houseId
+            RETURN house
+    `;
+    const houseCursor = await db.query(query, { houseId });
+    const house = await houseCursor.next();
+ 
+    if (!house) {
+        return res.status(404).send('., -% - )$%-.');
+    }
+ 
+    res.render('house', {
+        title: `        house,
+    });
+ 
+});
