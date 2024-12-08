@@ -25,22 +25,6 @@ exports.import = asyncHandler(async (req, res) => {
     res.send('Данные успешно импортированы.');
 });
 
-// Маршрут для страницы фильтрации улиц
-exports.streets_filter = asyncHandler(async (req, res) => {
-    // Получаем список уникальных типов улиц и районов из базы
-    const typesCursor = await db.query('FOR street IN streets RETURN DISTINCT street.type');
-    const types = await typesCursor.all();
- 
-    const districtsCursor = await db.query('FOR street IN streets RETURN DISTINCT street.district');
-    const districts = await districtsCursor.all();
- 
-    res.render('streets', {
-        title: 'Улицы Санкт-Петербурга',
-        types,
-        districts
-    });
-});
-
 // Маршрут для экспорта данных
 exports.export = asyncHandler(async (req, res) => {
     // Получаем данные из коллекций
@@ -66,6 +50,51 @@ exports.export = asyncHandler(async (req, res) => {
     // Отправляем данные клиенту
     res.json(exportData);
 });
+
+// Маршрут для страницы фильтрации улиц
+exports.streets_filter = asyncHandler(async (req, res) => {
+    // Получаем список уникальных типов улиц и районов из базы
+    const typesCursor = await db.query('FOR street IN streets RETURN DISTINCT street.type');
+    const types = await typesCursor.all();
+ 
+    const districtsCursor = await db.query('FOR street IN streets RETURN DISTINCT street.district');
+    const districts = await districtsCursor.all();
+ 
+    res.render('streets_filter', {
+        title: 'Улицы Санкт-Петербурга',
+        types,
+        districts
+    });
+});
+
+exports.streets = asyncHandler( async (req, res) => {
+    const { type, district } = req.query;
+
+    // Строим запрос с учётом фильтров
+    let query = 'FOR street IN streets';
+    const bindVars = {};
+
+    if (type) {
+        query += ' FILTER street.type == @type';
+        bindVars.type = type;
+    }
+
+    if (district) {
+        query += ' FILTER street.district == @district';
+        bindVars.district = district;
+    }
+
+    query += ' RETURN street';
+
+    // Выполняем запрос
+    const streetsCursor = await db.query(query, bindVars);
+    const streets = await streetsCursor.all();
+
+    // Отправляем отфильтрованные данные на фронтенд
+    res.render('streets', { title: 'Результаты фильтрации', streets });
+});
+
+
 
 
 // exports.streets = asyncHandler(async (req, res) => {

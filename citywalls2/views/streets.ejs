@@ -1,42 +1,24 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
 </head>
 <body>
 <h1><%= title %></h1>
 
-<form action="/main/streets/filter" method="GET">
-  <div class="filters">
-    <!-- Фильтр по типу -->
-    <div>
-      <label for="type">Введите тип:</label><br>
-      <select id="type" name="type">
-        <option value="">Все</option>
-        <% types.forEach(function(type) { %>
-          <option value="<%= type %>"><%= type %></option>
+<% if (streets.length === 0) { %>
+    <p>Ничего не найдено по заданным критериям.</p>
+<% } else { %>
+    <ul>
+        <% streets.forEach(function(street) { %>
+            <li><%= street.name %> (<%= street.type %>, <%= street.district %>)</li>
         <% }); %>
-      </select>
-    </div>
+    </ul>
+<% } %>
 
-    <!-- Фильтр по району -->
-    <div>
-      <label for="district">Введите район:</label><br>
-      <select id="district" name="district">
-        <option value="">Все</option>
-        <% districts.forEach(function(district) { %>
-          <option value="<%= district %>"><%= district %></option>
-        <% }); %>
-      </select>
-    </div>
-  </div>
-
-  <button type="submit" class="button">OK</button>
-</form>
-
-<a id="mainLink" href="/main">На главную</a>
+<a href="/main/streets">Назад к фильтрам</a>
 </body>
 </html>
