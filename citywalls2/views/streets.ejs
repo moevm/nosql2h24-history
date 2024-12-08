@@ -2,27 +2,41 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Список улиц</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
   <link rel="stylesheet" href="/stylesheets/styles.css">
 </head>
 <body>
-  <header>
-    <h1>Список улиц</h1>
-    <nav>
-      <a href="/">Главная</a>
-    </nav>
-  </header>
-  <main>
-    <ul>
-      <% streets.forEach(function(street) { %>
-        <li>
-          <a href="/streets/<%= street._key %>/houses"><%= street.name %></a>
-        </li>
-      <% }); %>
-    </ul>
-  </main>
-  <footer>
-    <p>&copy; 2023 City Data App</p>
-  </footer>
+<h1><%= title %></h1>
+
+<form action="/main/streets/filter" method="GET">
+  <div class="filters">
+    <!-- Фильтр по типу -->
+    <div>
+      <label for="type">Введите тип:</label><br>
+      <select id="type" name="type">
+        <option value="">Все</option>
+        <% types.forEach(function(type) { %>
+          <option value="<%= type %>"><%= type %></option>
+        <% }); %>
+      </select>
+    </div>
+
+    <!-- Фильтр по району -->
+    <div>
+      <label for="district">Введите район:</label><br>
+      <select id="district" name="district">
+        <option value="">Все</option>
+        <% districts.forEach(function(district) { %>
+          <option value="<%= district %>"><%= district %></option>
+        <% }); %>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" class="button">OK</button>
+</form>
+
+<a id="mainLink" href="/main">На главную</a>
 </body>
 </html>
