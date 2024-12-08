@@ -41,7 +41,30 @@ h1 {
   text-decoration: underline;
 }
 
-
+.nav-links {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  margin: 0 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.nav-links a:hover {
+  text-decoration: underline;
+}
+.image-container {
+  margin: 20px auto;
+  max-width: 600px;
+}
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
 
 
   /*header, footer {*/
