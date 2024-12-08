@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <style>
+        .house-container {
+            background-color: #87CEEB;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            margin: 20px auto;
+            text-align: left;
+        }
+        .house-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .house-container h2 {
+            text-align: center;
+            color: white;
+        }
+        .house-container p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: orange;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="house-container">
+    <h2>Адрес дома: <%= house.street %>, <%= house.house_number %></h2>
+    <img src="<%= house.photo %>" alt="Фото дома">
+    <p><strong>Год постройки:</strong> <%= house.construction_year %></p>
+    <p><strong>Количество этажей:</strong> <%= house.floors %></p>
+    <p><strong>Количество квартир:</strong> <%= house.apartments %></p>
+    <p><strong>Состояние:</strong> <%= house.condition %></p>
+    <p><strong>Управляющая компания:</strong> <%= house.management_company %></p>
+    <p><strong>Серия, тип:</strong> <%= house.series %></p>
+    <p><strong>Район:</strong> <%= house.district %></p>
+</div>
+<div>
+    <a href="/main/streets/<%= encodeURIComponent(house.street) %>/houses">
+        К списку домов улицы <%= house.street %>
+    </a>
+</div>
+</body>
+</html>
