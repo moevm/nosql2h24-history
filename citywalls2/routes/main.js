@@ -8,6 +8,9 @@ router.get('/', street_controller.index)
 
 router.get('/main', street_controller.main)
 
+// Маршрут для страницы фильтрации улиц
+router.get('/main/streets', street_controller.streets_filter)
+
 router.post('/import',  street_controller.import)
 
 // Маршрут для экспорта данных

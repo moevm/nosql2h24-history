@@ -55,6 +55,22 @@ exports.houses = asyncHandler(async (req, res) => {
     res.render('houses', { houses, streetKey });
 });
 
+// Маршрут для страницы фильтрации улиц
+exports.streets_filter = asyncHandler(async (req, res) => {
+    // Получаем список уникальных типов улиц и районов из базы
+    const typesCursor = await db.query('FOR street IN streets RETURN DISTINCT street.type');
+    const types = await typesCursor.all();
+ 
+    const districtsCursor = await db.query('FOR street IN streets RETURN DISTINCT street.district');
+    const districts = await districtsCursor.all();
+ 
+    res.render('streets', {
+        title: 'Улицы Санкт-Петербурга',
+        types,
+        districts
+    });
+});
+
 // Маршрут для экспорта данных
 exports.export = asyncHandler(async (req, res) => {
     // Получаем данные из коллекций
