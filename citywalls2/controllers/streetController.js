@@ -84,14 +84,15 @@ exports.streets = asyncHandler( async (req, res) => {
         bindVars.district = district;
     }
 
-    query += ' RETURN street';
+    // Добавляем сортировку
+    query += ' SORT street.name ASC RETURN street';
 
     // Выполняем запрос
     const streetsCursor = await db.query(query, bindVars);
     const streets = await streetsCursor.all();
 
     // Отправляем отфильтрованные данные на фронтенд
-    res.render('streets', { title: 'Результаты фильтрации', streets });
+    res.render('streets', { title: 'Улицы Санкт-Петербурга (результат фильтрации)', streets });
 });
 
 
