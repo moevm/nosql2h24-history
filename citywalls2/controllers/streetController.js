@@ -12,6 +12,10 @@ const db = require("../db");
 //     // getBooksByGenre,
 // } = require("./functions");
 
+exports.main = asyncHandler(async (req, res) => {
+    res.render('main', { title: 'Сервис истории домов Санкт-Петербурга' });
+});
+
 exports.index = asyncHandler(async (req, res) => {
     res.render('index');
 });
