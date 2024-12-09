@@ -10,6 +10,7 @@
 <h1><%= title %></h1>
 
 <form action="/main/houses/filter" method="GET">
+    <!-- Фильтр по году постройки -->
     <div>
         <label for="year">Введите год постройки:</label>
         <select id="year" name="year">
@@ -21,6 +22,7 @@
         </select>
     </div>
 
+    <!-- Фильтр по району -->
     <div>
         <label for="district">Введите район:</label>
         <select id="district" name="district">
@@ -31,26 +33,41 @@
         </select>
     </div>
 
+    <!-- Фильтр по количеству этажей -->
     <div>
         <label for="floors">Введите количество этажей:</label>
         <input type="number" id="floors" name="floors" placeholder="Value">
     </div>
 
+    <!-- Фильтр по количеству квартир -->
     <div>
         <label for="apartments">Введите количество квартир:</label>
         <input type="number" id="apartments" name="apartments" placeholder="Value">
     </div>
 
+    <!-- Фильтр по состоянию дома -->
     <div>
         <label for="condition">Введите состояние дома:</label>
-        <input type="text" id="condition" name="condition" placeholder="Value">
+        <select id="condition" name="condition">
+            <option value="">Все</option>
+            <% conditions.forEach(function(condition) { %>
+                <option value="<%= condition %>"><%= condition %></option>
+            <% }); %>
+        </select>
     </div>
 
+    <!-- Фильтр по управляющей компании -->
     <div>
         <label for="management_company">Введите УК:</label>
-        <input type="text" id="management_company" name="management_company" placeholder="Value">
+        <select id="management_company" name="management_company">
+            <option value="">Все</option>
+            <% managementCompanies.forEach(function(company) { %>
+                <option value="<%= company %>"><%= company %></option>
+            <% }); %>
+        </select>
     </div>
 
+    <!-- Фильтр по улице -->
     <div>
         <label for="street">Введите улицу:</label>
         <input type="text" id="street" name="street" placeholder="Value">

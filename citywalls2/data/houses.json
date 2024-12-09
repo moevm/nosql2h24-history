@@ -99,7 +99,7 @@
     "floors": 27,
     "apartments": 803,
     "condition": "Исправный",
-    "management_company": "Комендантский, 13",
+    "management_company": "нет",
     "series": "индивидуальный",
     "district": "Приморский"
   },
@@ -138,7 +138,7 @@
     "floors": 9,
     "apartments": 367,
     "condition": "Исправный",
-    "management_company": "Сиреневый 7-1",
+    "management_company": "нет",
     "series": "504",
     "district": "Выборгский"
   },

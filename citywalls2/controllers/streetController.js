@@ -154,10 +154,18 @@ exports.houseDetails = asyncHandler(async (req, res) => {
 exports.filterPage = asyncHandler(async (req, res) => {
     const districtsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.district');
     const districts = await districtsCursor.all();
- 
+
+    const managementCompaniesCursor = await db.query('FOR house IN houses RETURN DISTINCT house.management_company');
+    const managementCompanies = await managementCompaniesCursor.all();
+
+    const conditionsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.condition');
+    const conditions = await conditionsCursor.all();
+
     res.render('houses_filter', {
         title: 'Дома Санкт-Петербурга',
         districts,
+        managementCompanies,
+        conditions,
     });
 });
  
