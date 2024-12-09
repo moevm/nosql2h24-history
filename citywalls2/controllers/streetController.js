@@ -222,3 +222,4 @@ exports.filteredHouses = asyncHandler(async (req, res) => {
         houses,
     });
 });
+
