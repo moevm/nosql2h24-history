@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+<h1><%= title %></h1>
+
+<% if (!houses || houses.length === 0) { %>
+    <p>Дома не найдены.</p>
+<% } else { %>
+    <table>
+        <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Адрес</th>
+            <th>Год</th>
+            <th>Количество этажей</th>
+            <th>Количество квартир</th>
+            <th>Состояние</th>
+            <th>УК</th>
+            <th>Серия, тип</th>
+            <th>Район</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% houses.forEach(function(house) { %>
+            <tr>
+                <td><img src="<%= house.photo %>" alt="Фото дома" class="house-photo"></td>
+                <td>
+                    <a href="/main/streets/<%= encodeURIComponent(house.street) %>/houses/<%= house._key %>">
+                        <%= house.street %>, <%= house.house_number %>
+                    </a>
+                </td>
+                <td><%= house.construction_year %></td>
+                <td><%= house.floors %></td>
+                <td><%= house.apartments %></td>
+                <td><%= house.condition %></td>
+                <td><%= house.management_company %></td>
+                <td><%= house.series %></td>
+                <td><%= house.district %></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+<% } %>
+
+<a href="/main/houses">К фильтрам домов</a>
+</body>
+</html>
