@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+<h1><%= title %></h1>
+
+<form action="/main/houses/filter" method="GET">
+    <div>
+        <label for="year">Введите год постройки:</label>
+        <select id="year" name="year">
+            <option value="">Все</option>
+            <option value="0-1900">до 1900</option>
+            <option value="1900-1950">1900-1950</option>
+            <option value="1950-2000">1950-2000</option>
+            <option value="2000-2024">2000-2024</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="district">Введите район:</label>
+        <select id="district" name="district">
+            <option value="">Все</option>
+            <% districts.forEach(function(district) { %>
+                <option value="<%= district %>"><%= district %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <div>
+        <label for="floors">Введите количество этажей:</label>
+        <input type="number" id="floors" name="floors" placeholder="Value">
+    </div>
+
+    <div>
+        <label for="apartments">Введите количество квартир:</label>
+        <input type="number" id="apartments" name="apartments" placeholder="Value">
+    </div>
+
+    <div>
+        <label for="condition">Введите состояние дома:</label>
+        <input type="text" id="condition" name="condition" placeholder="Value">
+    </div>
+
+    <div>
+        <label for="management_company">Введите УК:</label>
+        <input type="text" id="management_company" name="management_company" placeholder="Value">
+    </div>
+
+    <div>
+        <label for="street">Введите улицу:</label>
+        <input type="text" id="street" name="street" placeholder="Value">
+    </div>
+
+    <button type="submit">OK</button>
+</form>
+
+<a href="/main">На главную</a>
+</body>
+</html>
