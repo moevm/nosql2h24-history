@@ -98,7 +98,8 @@ th, td {
 th {
   background-color: #f4f4f4;
 }
-img {
+
+.house-photo {
   max-width: 100px;
   height: auto;
 }
