@@ -65,7 +65,8 @@
 
     <div>
         <label for="street">Введите улицу:</label>
-        <input type="text" id="street" name="street" value="<%= filters.street || '' %>" placeholder="Value">
+        <input type="text" id="street" name="street" value="<%= filters.street || '' %>" placeholder="Value" autocomplete="off">
+        <ul id="suggestions" class="suggestions-list"></ul>
     </div>
 
     <button type="submit">OK</button>
@@ -112,5 +113,34 @@
 <% } %>
 
 <a href="/main">На главную</a>
+
+<script>
+    document.getElementById('street').addEventListener('input', async function () {
+        const query = this.value.trim();
+        const suggestionsList = document.getElementById('suggestions');
+
+        if (query.length < 1) {
+            suggestionsList.innerHTML = ''; // Очистить список подсказок
+            return;
+        }
+
+        try {
+            const response = await fetch(`/main/streets/suggestions?query=${encodeURIComponent(query)}`);
+            const streets = await response.json();
+
+            suggestionsList.innerHTML = streets
+                .map(street => `<li class="suggestion-item" onclick="selectSuggestion('${street}')">${street}</li>`)
+                .join('');
+        } catch (error) {
+            console.error('Ошибка при загрузке подсказок:', error);
+        }
+    });
+
+    function selectSuggestion(street) {
+        document.getElementById('street').value = street;
+        document.getElementById('suggestions').innerHTML = '';
+    }
+</script>
+
 </body>
 </html>

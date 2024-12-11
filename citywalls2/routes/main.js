@@ -23,6 +23,8 @@ router.get('/main/streets/:streetName/houses/:houseId', street_controller.houseD
 
 router.get('/main/houses', street_controller.filteredHouses);
 
+router.get('/main/streets/suggestions', street_controller.streetSuggestions);
+
 module.exports = router;
 
 

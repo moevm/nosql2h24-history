@@ -252,3 +252,22 @@ exports.filteredHouses = asyncHandler(async (req, res) => {
         },
     });
 });
+
+exports.streetSuggestions = asyncHandler(async (req, res) => {
+    const { query } = req.query;
+
+    if (!query || query.trim() === '') {
+        return res.json([]);
+    }
+
+    const streetQuery = `
+        FOR street IN streets
+        FILTER LIKE(LOWER(street.name), CONCAT(@query, '%'), true)
+        RETURN DISTINCT street.name
+    `;
+
+    const streetsCursor = await db.query(streetQuery, { query: query.toLowerCase() });
+    const streets = await streetsCursor.all();
+
+    res.json(streets);
+});
