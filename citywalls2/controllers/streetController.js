@@ -148,27 +148,20 @@ exports.houseDetails = asyncHandler(async (req, res) => {
 
 });
 
-exports.filterPage = asyncHandler(async (req, res) => {
-    const districtsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.district');
-    const districts = await districtsCursor.all();
-
-    const managementCompaniesCursor = await db.query('FOR house IN houses RETURN DISTINCT house.management_company');
-    const managementCompanies = await managementCompaniesCursor.all();
-
-    const conditionsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.condition');
-    const conditions = await conditionsCursor.all();
-
-    res.render('houses_filter', {
-        title: 'Дома Санкт-Петербурга',
-        districts,
-        managementCompanies,
-        conditions,
-    });
-});
- 
 exports.filteredHouses = asyncHandler(async (req, res) => {
     const { year, district, floors, apartments, condition, management_company, street } = req.query;
  
+    // Получаем уникальные значения для фильтров
+    const districtsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.district');
+    const districts = await districtsCursor.all();
+ 
+    const managementCompaniesCursor = await db.query('FOR house IN houses RETURN DISTINCT house.management_company');
+    const managementCompanies = await managementCompaniesCursor.all();
+ 
+    const conditionsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.condition');
+    const conditions = await conditionsCursor.all();
+ 
+    // Строим запрос для фильтрации домов
     let query = 'FOR house IN houses';
     const bindVars = {};
  
@@ -214,9 +207,14 @@ exports.filteredHouses = asyncHandler(async (req, res) => {
     const cursor = await db.query(query, bindVars);
     const houses = await cursor.all();
  
+    // Передаем данные для фильтров и результаты поиска
     res.render('houses_list', {
-        title: 'Результаты фильтрации домов',
+        title: 'Дома Санкт-Петербурга',
+        districts,
+        managementCompanies,
+        conditions,
         houses,
+        filters: { year, district, floors, apartments, condition, management_company, street },
     });
 });
 
