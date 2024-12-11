@@ -103,3 +103,14 @@ th {
   max-width: 100px;
   height: auto;
 }
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Расстояние между элементами */
+}
+
+.centered {
+  justify-content: center; /* Центрирование по горизонтали */
+  margin: 20px 0; /* Отступы сверху и снизу */
+}
