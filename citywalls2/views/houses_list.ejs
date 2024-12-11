@@ -11,15 +11,12 @@
 
 <!-- Форма фильтрации -->
 <form action="/main/houses" method="GET">
-    <div>
-        <label for="year">Введите год постройки:</label>
-        <select id="year" name="year">
-            <option value="">Все</option>
-            <option value="0-1900" <%= filters.year === '0-1900' ? 'selected' : '' %>>до 1900</option>
-            <option value="1900-1950" <%= filters.year === '1900-1950' ? 'selected' : '' %>>1900-1950</option>
-            <option value="1950-2000" <%= filters.year === '1950-2000' ? 'selected' : '' %>>1950-2000</option>
-            <option value="2000-2024" <%= filters.year === '2000-2024' ? 'selected' : '' %>>2000-2024</option>
-        </select>
+    <!-- Год постройки -->
+    <div class="flex-row centered">
+        <label for="year_from">Год постройки:</label>
+        <input type="number" id="year_from" name="year_from" value="<%= filters.year_from || '' %>" placeholder="От">
+        <span>—</span>
+        <input type="number" id="year_to" name="year_to" value="<%= filters.year_to || '' %>" placeholder="До">
     </div>
 
     <div>

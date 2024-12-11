@@ -149,7 +149,18 @@ exports.houseDetails = asyncHandler(async (req, res) => {
 });
 
 exports.filteredHouses = asyncHandler(async (req, res) => {
-    const { year, district, floors_from, floors_to, apartments_from, apartments_to, condition, management_company, street } = req.query;
+    const {
+        year_from,
+        year_to,
+        district,
+        floors_from,
+        floors_to,
+        apartments_from,
+        apartments_to,
+        condition,
+        management_company,
+        street,
+    } = req.query;
 
     // Получаем уникальные значения для фильтров
     const districtsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.district');
@@ -165,11 +176,14 @@ exports.filteredHouses = asyncHandler(async (req, res) => {
     let query = 'FOR house IN houses';
     const bindVars = {};
 
-    if (year) {
-        const [minYear, maxYear] = year.split('-').map(Number);
-        query += ' FILTER house.construction_year >= @minYear AND house.construction_year <= @maxYear';
-        bindVars.minYear = minYear;
-        bindVars.maxYear = maxYear;
+    if (year_from) {
+        query += ' FILTER house.construction_year >= @year_from';
+        bindVars.year_from = Number(year_from);
+    }
+
+    if (year_to) {
+        query += ' FILTER house.construction_year <= @year_to';
+        bindVars.year_to = Number(year_to);
     }
 
     if (district) {
@@ -225,7 +239,8 @@ exports.filteredHouses = asyncHandler(async (req, res) => {
         conditions,
         houses,
         filters: {
-            year,
+            year_from,
+            year_to,
             district,
             floors_from,
             floors_to,
