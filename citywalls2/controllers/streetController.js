@@ -149,64 +149,69 @@ exports.houseDetails = asyncHandler(async (req, res) => {
 });
 
 exports.filteredHouses = asyncHandler(async (req, res) => {
-    const { year, district, floors, apartments, condition, management_company, street } = req.query;
- 
+    const { year, district, floors_from, floors_to, apartments, condition, management_company, street } = req.query;
+
     // Получаем уникальные значения для фильтров
     const districtsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.district');
     const districts = await districtsCursor.all();
- 
+
     const managementCompaniesCursor = await db.query('FOR house IN houses RETURN DISTINCT house.management_company');
     const managementCompanies = await managementCompaniesCursor.all();
- 
+
     const conditionsCursor = await db.query('FOR house IN houses RETURN DISTINCT house.condition');
     const conditions = await conditionsCursor.all();
- 
+
     // Строим запрос для фильтрации домов
     let query = 'FOR house IN houses';
     const bindVars = {};
- 
+
     if (year) {
         const [minYear, maxYear] = year.split('-').map(Number);
         query += ' FILTER house.construction_year >= @minYear AND house.construction_year <= @maxYear';
         bindVars.minYear = minYear;
         bindVars.maxYear = maxYear;
     }
- 
+
     if (district) {
         query += ' FILTER house.district == @district';
         bindVars.district = district;
     }
- 
-    if (floors) {
-        query += ' FILTER house.floors == @floors';
-        bindVars.floors = Number(floors);
+
+    if (floors_from) {
+        query += ' FILTER house.floors >= @floors_from';
+        bindVars.floors_from = Number(floors_from);
     }
- 
+
+    if (floors_to) {
+        query += ' FILTER house.floors <= @floors_to';
+        bindVars.floors_to = Number(floors_to);
+    }
+
     if (apartments) {
         query += ' FILTER house.apartments == @apartments';
         bindVars.apartments = Number(apartments);
     }
- 
+
     if (condition) {
         query += ' FILTER house.condition == @condition';
         bindVars.condition = condition;
     }
- 
+
     if (management_company) {
         query += ' FILTER house.management_company == @management_company';
         bindVars.management_company = management_company;
     }
- 
+
     if (street) {
         query += ' FILTER house.street == @street';
         bindVars.street = street;
     }
- 
+
     query += ' RETURN house';
- 
+
     const cursor = await db.query(query, bindVars);
     const houses = await cursor.all();
- 
+
     // Передаем данные для фильтров и результаты поиска
     res.render('houses_list', {
         title: 'Дома Санкт-Петербурга',
@@ -214,7 +219,6 @@ exports.filteredHouses = asyncHandler(async (req, res) => {
         managementCompanies,
         conditions,
         houses,
-        filters: { year, district, floors, apartments, condition, management_company, street },
+        filters: { year, district, floors_from, floors_to, apartments, condition, management_company, street },
     });
 });
-

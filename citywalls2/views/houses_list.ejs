@@ -32,9 +32,11 @@
         </select>
     </div>
 
-    <div>
-        <label for="floors">Введите количество этажей:</label>
-        <input type="number" id="floors" name="floors" value="<%= filters.floors || '' %>" placeholder="Value">
+    <div class="flex-row centered">
+        <label for="floors_from">Количество этажей:</label>
+        <input type="number" id="floors_from" name="floors_from" value="<%= filters.floors_from || '' %>" placeholder="От">
+        <span>—</span>
+        <input type="number" id="floors_to" name="floors_to" value="<%= filters.floors_to || '' %>" placeholder="До">
     </div>
 
     <div>
