@@ -9,6 +9,36 @@
 <body>
 <h1><%= title %></h1>
 
+<!-- Форма фильтрации -->
+<form action="/main/streets" method="GET">
+    <div class="filters">
+        <!-- Фильтр по типу -->
+        <div>
+            <label for="type">Введите тип:</label><br>
+            <select id="type" name="type">
+                <option value="">Все</option>
+                <% types.forEach(function(type) { %>
+                    <option value="<%= type %>" <%= filters.type === type ? 'selected' : '' %>><%= type %></option>
+                <% }); %>
+            </select>
+        </div>
+
+        <!-- Фильтр по району -->
+        <div>
+            <label for="district">Введите район:</label><br>
+            <select id="district" name="district">
+                <option value="">Все</option>
+                <% districts.forEach(function(district) { %>
+                    <option value="<%= district %>" <%= filters.district === district ? 'selected' : '' %>><%= district %></option>
+                <% }); %>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="button">Применить фильтры</button>
+</form>
+
+<!-- Список улиц -->
 <% if (!streets || streets.length === 0) { %>
     <p>Нет улиц подходящих под ваш фильтр.</p>
 <% } else { %>
@@ -23,6 +53,6 @@
     </ul>
 <% } %>
 
-<a href="/main/streets">Назад к фильтрам</a>
+<a href="/main">На главную</a>
 </body>
 </html>
