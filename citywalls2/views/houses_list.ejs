@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,6 +9,68 @@
 <body>
 <h1><%= title %></h1>
 
+<!-- Форма фильтрации -->
+<form action="/main/houses" method="GET">
+    <div>
+        <label for="year">Введите год постройки:</label>
+        <select id="year" name="year">
+            <option value="">Все</option>
+            <option value="0-1900" <%= filters.year === '0-1900' ? 'selected' : '' %>>до 1900</option>
+            <option value="1900-1950" <%= filters.year === '1900-1950' ? 'selected' : '' %>>1900-1950</option>
+            <option value="1950-2000" <%= filters.year === '1950-2000' ? 'selected' : '' %>>1950-2000</option>
+            <option value="2000-2024" <%= filters.year === '2000-2024' ? 'selected' : '' %>>2000-2024</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="district">Введите район:</label>
+        <select id="district" name="district">
+            <option value="">Все</option>
+            <% districts.forEach(function(district) { %>
+                <option value="<%= district %>" <%= filters.district === district ? 'selected' : '' %>><%= district %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <div>
+        <label for="floors">Введите количество этажей:</label>
+        <input type="number" id="floors" name="floors" value="<%= filters.floors || '' %>" placeholder="Value">
+    </div>
+
+    <div>
+        <label for="apartments">Введите количество квартир:</label>
+        <input type="number" id="apartments" name="apartments" value="<%= filters.apartments || '' %>" placeholder="Value">
+    </div>
+
+    <div>
+        <label for="condition">Введите состояние дома:</label>
+        <select id="condition" name="condition">
+            <option value="">Все</option>
+            <% conditions.forEach(function(condition) { %>
+                <option value="<%= condition %>" <%= filters.condition === condition ? 'selected' : '' %>><%= condition %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <div>
+        <label for="management_company">Введите УК:</label>
+        <select id="management_company" name="management_company">
+            <option value="">Все</option>
+            <% managementCompanies.forEach(function(company) { %>
+                <option value="<%= company %>" <%= filters.management_company === company ? 'selected' : '' %>><%= company %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <div>
+        <label for="street">Введите улицу:</label>
+        <input type="text" id="street" name="street" value="<%= filters.street || '' %>" placeholder="Value">
+    </div>
+
+    <button type="submit">OK</button>
+</form>
+
+<!-- Список домов -->
 <% if (!houses || houses.length === 0) { %>
     <p>Дома не найдены.</p>
 <% } else { %>
@@ -49,6 +110,6 @@
     </table>
 <% } %>
 
-<a href="/main/houses">К фильтрам домов</a>
+<a href="/main">На главную</a>
 </body>
 </html>
